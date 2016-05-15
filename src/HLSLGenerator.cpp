@@ -50,6 +50,8 @@ static const char* GetTypeName(const HLSLType& type)
     case HLSLBaseType_Uint3:        return "uint3";
     case HLSLBaseType_Uint4:        return "uint4";
     case HLSLBaseType_Texture:      return "texture";
+    case HLSLBaseType_Texture2D:    return "texture2D";
+    case HLSLBaseType_Texture3D:    return "texture3D";
     case HLSLBaseType_Sampler:      return "sampler";
     case HLSLBaseType_Sampler2D:    return "sampler2D";
     case HLSLBaseType_Sampler3D:    return "sampler3D";
@@ -61,6 +63,7 @@ static const char* GetTypeName(const HLSLType& type)
     return "?";
 }
 
+/*
 static int GetFunctionArguments(HLSLFunctionCall* functionCall, HLSLExpression* expression[], int maxArguments)
 {
     HLSLExpression* argument = functionCall->argument;
@@ -76,6 +79,7 @@ static int GetFunctionArguments(HLSLFunctionCall* functionCall, HLSLExpression* 
     }
     return numArguments;
 }
+*/
 
 HLSLGenerator::HLSLGenerator(Allocator* allocator) :
     m_writer(allocator)

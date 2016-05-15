@@ -608,6 +608,8 @@ const BaseTypeDescription _baseTypeDescriptions[HLSLBaseType_Count] =
         { "uint4",              NumericType_Uint,       4, 1, 1,  2 },      // HLSLBaseType_Uint4
 
         { "texture",            NumericType_NaN,        1, 0, 0, -1 },      // HLSLBaseType_Texture
+        { "texture2D",          NumericType_NaN,        1, 0, 0, -1 },      // HLSLBaseType_Texture2D
+        { "texture3D",          NumericType_NaN,        1, 0, 0, -1 },      // HLSLBaseType_Texture3D
         { "sampler",            NumericType_NaN,        1, 0, 0, -1 },      // HLSLBaseType_Sampler
         { "sampler2D",          NumericType_NaN,        1, 0, 0, -1 },      // HLSLBaseType_Sampler2D
         { "sampler3D",          NumericType_NaN,        1, 0, 0, -1 },      // HLSLBaseType_Sampler3D
@@ -1417,7 +1419,7 @@ bool HLSLParser::ParseTopLevel(HLSLStatement*& statement)
             {
                 // @@ Currently we support either a semantic or a register, but not both.
                 if (AcceptIdentifier(declaration->semantic)) {
-                    int k = 1;
+                    //int k = 1;
                 }
                 else if (!Expect(HLSLToken_Register) || !Expect('(') || !ExpectIdentifier(declaration->registerName) || !Expect(')'))
                 {
@@ -1653,7 +1655,7 @@ bool HLSLParser::ParseStatement(HLSLStatement*& statement, const HLSLType& retur
 
 // IC: This is only used in block statements, or within control flow statements. So, it doesn't support semantics or layout modifiers.
 // @@ We should add suport for semantics for inline input/output declarations.
-bool HLSLParser::ParseDeclaration(HLSLDeclaration*& declaration)
+bool HLSLParser::ParseDeclaration(HLSLDeclaration*& declarationIn)
 {
     const char* fileName    = GetFileName();
     int         line        = GetLineNumber();
@@ -1708,7 +1710,7 @@ bool HLSLParser::ParseDeclaration(HLSLDeclaration*& declaration)
 
     } while(Accept(','));
 
-    declaration = firstDeclaration;
+    declarationIn = firstDeclaration;
 
     return true;
 }
@@ -2042,16 +2044,16 @@ bool HLSLParser::ParseTerminalExpression(HLSLExpression*& expression, bool& need
 
     needsEndParen = false;
 
-    HLSLUnaryOp unaryOp;
-    if (AcceptUnaryOperator(true, unaryOp))
+    HLSLUnaryOp unaryOpIn;
+    if (AcceptUnaryOperator(true, unaryOpIn))
     {
         HLSLUnaryExpression* unaryExpression = m_tree->AddNode<HLSLUnaryExpression>(fileName, line);
-        unaryExpression->unaryOp = unaryOp;
+        unaryExpression->unaryOp = unaryOpIn;
         if (!ParseTerminalExpression(unaryExpression->expression, needsEndParen))
         {
             return false;
         }
-        if (unaryOp == HLSLUnaryOp_BitNot)
+        if (unaryOpIn == HLSLUnaryOp_BitNot)
         {
             if (unaryExpression->expression->expressionType.baseType < HLSLBaseType_FirstInteger || 
                 unaryExpression->expression->expressionType.baseType > HLSLBaseType_LastInteger)
@@ -2061,7 +2063,7 @@ bool HLSLParser::ParseTerminalExpression(HLSLExpression*& expression, bool& need
                 return false;
             }
         }
-        if (unaryOp == HLSLUnaryOp_Not)
+        if (unaryOpIn == HLSLUnaryOp_Not)
         {
             unaryExpression->expressionType = HLSLType(HLSLBaseType_Bool);
         }
@@ -2686,7 +2688,7 @@ static const EffectStateValue* GetStateValue(const char* name, const EffectState
 }
 
 
-bool HLSLParser::ParseStateName(bool isSamplerState, bool isPipelineState, const char*& name, const EffectState *& state)
+bool HLSLParser::ParseStateName(bool isSamplerState, bool isPipelineState, const char*&, const EffectState *& state)
 {
     if (m_tokenizer.GetToken() != HLSLToken_Identifier)
     {
@@ -2872,7 +2874,7 @@ bool HLSLParser::ParseStateAssignment(HLSLStateAssignment*& stateAssignment, boo
 }
 
 
-bool HLSLParser::ParseAttributeList(HLSLAttribute*& attribute)
+bool HLSLParser::ParseAttributeList(HLSLAttribute*&)
 {
     do {
         const char * identifier = NULL;
@@ -3155,6 +3157,19 @@ bool HLSLParser::AcceptType(bool allowVoid, HLSLBaseType& type, const char*& typ
     case HLSLToken_Texture:
         type = HLSLBaseType_Texture;
         break;
+    case HLSLToken_Texture1D:
+        //type = HLSLBaseType_Texture1D;
+        break;
+    case HLSLToken_Texture2D:
+        type = HLSLBaseType_Texture2D;
+        break;
+    case HLSLToken_Texture3D:
+        type = HLSLBaseType_Texture3D;
+        break;
+    case HLSLToken_TextureCube:
+        //type = HLSLBaseType_TextureCube;
+        break;
+
     case HLSLToken_Sampler:
         type = HLSLBaseType_Sampler2D;  // @@ IC: For now we assume that generic samplers are always sampler2D
         break;
@@ -3365,7 +3380,7 @@ const HLSLFunction* HLSLParser::MatchFunctionCall(const HLSLFunctionCall* functi
 {
     const HLSLFunction* matchedFunction     = NULL;
 
-    int  numArguments           = functionCall->numArguments;
+    //int  numArguments           = functionCall->numArguments;
     int  numMatchedOverloads    = 0;
     bool nameMatches            = false;
 

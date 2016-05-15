@@ -76,6 +76,7 @@ void ConstructRange(T * buffer, int new_size, int old_size, const T & val) {
 
 template <typename T>
 void DestroyRange(T * buffer, int new_size, int old_size) {
+    auto v = [&](T* buff) { buffer = buff;  };
     for (int i = new_size; i < old_size; i++) {
         (buffer+i)->~T(); // Explicit call to the destructor
     }

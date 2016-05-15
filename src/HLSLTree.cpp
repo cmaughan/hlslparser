@@ -450,10 +450,7 @@ bool HLSLTree::GetExpressionValue(HLSLExpression * expression, float & value)
 }
 */
 
-
-
-
-void HLSLTreeVisitor::VisitType(HLSLType & type)
+void HLSLTreeVisitor::VisitType(HLSLType &)
 {
 }
 
@@ -646,9 +643,9 @@ void HLSLTreeVisitor::VisitReturnStatement(HLSLReturnStatement * node)
     VisitExpression(node->expression);
 }
 
-void HLSLTreeVisitor::VisitDiscardStatement(HLSLDiscardStatement * node) {}
-void HLSLTreeVisitor::VisitBreakStatement(HLSLBreakStatement * node) {}
-void HLSLTreeVisitor::VisitContinueStatement(HLSLContinueStatement * node) {}
+void HLSLTreeVisitor::VisitDiscardStatement(HLSLDiscardStatement *) {}
+void HLSLTreeVisitor::VisitBreakStatement(HLSLBreakStatement *) {}
+void HLSLTreeVisitor::VisitContinueStatement(HLSLContinueStatement *) {}
 
 void HLSLTreeVisitor::VisitIfStatement(HLSLIfStatement * node)
 {
@@ -702,8 +699,8 @@ void HLSLTreeVisitor::VisitCastingExpression(HLSLCastingExpression * node)
     VisitExpression(node->expression);
 }
 
-void HLSLTreeVisitor::VisitLiteralExpression(HLSLLiteralExpression * node) {}
-void HLSLTreeVisitor::VisitIdentifierExpression(HLSLIdentifierExpression * node) {}
+void HLSLTreeVisitor::VisitLiteralExpression(HLSLLiteralExpression *) {}
+void HLSLTreeVisitor::VisitIdentifierExpression(HLSLIdentifierExpression *) {}
 
 void HLSLTreeVisitor::VisitConstructorExpression(HLSLConstructorExpression * node)
 {
@@ -734,7 +731,7 @@ void HLSLTreeVisitor::VisitFunctionCall(HLSLFunctionCall * node)
     }
 }
 
-void HLSLTreeVisitor::VisitStateAssignment(HLSLStateAssignment * node) {}
+void HLSLTreeVisitor::VisitStateAssignment(HLSLStateAssignment *) {}
 
 void HLSLTreeVisitor::VisitSamplerState(HLSLSamplerState * node)
 {

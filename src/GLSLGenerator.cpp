@@ -72,6 +72,8 @@ static const char* GetTypeName(const HLSLType& type)
     case HLSLBaseType_Uint3:        return "uvec3";
     case HLSLBaseType_Uint4:        return "uvec4";
     case HLSLBaseType_Texture:      return "texture";
+    case HLSLBaseType_Texture2D:    return "texture2D";
+    case HLSLBaseType_Texture3D:    return "texture3D";
     case HLSLBaseType_Sampler:      return "sampler";
     case HLSLBaseType_Sampler2D:    return "sampler2D";
     case HLSLBaseType_Sampler3D:    return "sampler3D";
@@ -341,10 +343,10 @@ void GLSLGenerator::OutputExpressionList(HLSLExpression* expression, HLSLArgumen
     }
 }
 
-void GLSLGenerator::OutputExpression(HLSLExpression* expression, const HLSLType* dstType)
+void GLSLGenerator::OutputExpression(HLSLExpression* expression, const HLSLType* dstTypeIn)
 {
 
-    bool cast = dstType != NULL && !GetCanImplicitCast(expression->expressionType, *dstType);
+    bool cast = dstTypeIn != NULL && !GetCanImplicitCast(expression->expressionType, *dstTypeIn);
     if (expression->nodeType == HLSLNodeType_CastingExpression)
     {
         // No need to include a cast if the expression is already doing it.
@@ -353,7 +355,7 @@ void GLSLGenerator::OutputExpression(HLSLExpression* expression, const HLSLType*
 
     if (cast)
     {
-        OutputDeclaration(*dstType, "");
+        OutputDeclaration(*dstTypeIn, "");
         m_writer.Write("(");
     }
 
@@ -533,7 +535,7 @@ void GLSLGenerator::OutputExpression(HLSLExpression* expression, const HLSLType*
             memberAccess->object->expressionType.baseType == HLSLBaseType_Uint)
         {
             // Handle swizzling on scalar values.
-            int swizzleLength = strlen(memberAccess->field);
+            int swizzleLength = int(strlen(memberAccess->field));
             if (swizzleLength == 2)
             {
                 m_writer.Write("%s", m_scalarSwizzle2Function);
@@ -802,7 +804,9 @@ void GLSLGenerator::OutputStatements(int indent, HLSLStatement* statement, const
             HLSLDeclaration* declaration = static_cast<HLSLDeclaration*>(statement);
 
             // GLSL doesn't seem have texture uniforms, so just ignore them.
-            if (declaration->type.baseType != HLSLBaseType_Texture)
+            if ((declaration->type.baseType != HLSLBaseType_Texture) &&
+                (declaration->type.baseType != HLSLBaseType_Texture2D) &&
+                (declaration->type.baseType != HLSLBaseType_Texture3D))
             {
                 m_writer.BeginLine(indent, declaration->fileName, declaration->line);
                 if (indent == 0)
@@ -853,7 +857,7 @@ void GLSLGenerator::OutputStatements(int indent, HLSLStatement* statement, const
             HLSLFunction* function = static_cast<HLSLFunction*>(statement);
 
             // Check if this is our entry point.
-            bool entryPoint = String_Equal(function->name, m_entryName);
+            /*bool entryPoint = */String_Equal(function->name, m_entryName);
 
             // Use an alternate name for the function which is supposed to be entry point
             // so that we can supply our own function which will be the actual entry point.

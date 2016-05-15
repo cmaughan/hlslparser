@@ -15,6 +15,7 @@
 
 #include <stdarg.h>
 
+#pragma warning(disable : 4189)
 namespace M4
 {
 

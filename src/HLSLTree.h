@@ -82,6 +82,8 @@ enum HLSLBaseType
     HLSLBaseType_LastInteger = HLSLBaseType_Uint4,
     HLSLBaseType_LastNumeric = HLSLBaseType_Uint4,
     HLSLBaseType_Texture,
+    HLSLBaseType_Texture2D,
+    HLSLBaseType_Texture3D,
     HLSLBaseType_Sampler,           // @@ use type inference to determine sampler type.
     HLSLBaseType_Sampler2D,
     HLSLBaseType_Sampler3D,
