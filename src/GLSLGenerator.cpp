@@ -487,8 +487,10 @@ void GLSLGenerator::OutputExpression(HLSLExpression* expression, const HLSLType*
 			case HLSLBinaryOp_SubAssign:    op = " -= "; dstType2 = &binaryExpression->expressionType; break;
 			case HLSLBinaryOp_MulAssign:    op = " *= "; dstType2 = &binaryExpression->expressionType; break;
 			case HLSLBinaryOp_DivAssign:    op = " /= "; dstType2 = &binaryExpression->expressionType; break;
-			case HLSLBinaryOp_And:          op = " && "; dstType1 = dstType2 = &binaryExpression->expressionType; break;
+			case HLSLBinaryOp_AndAnd:       op = " && "; dstType1 = dstType2 = &binaryExpression->expressionType; break;
 			case HLSLBinaryOp_Or:           op = " || "; dstType1 = dstType2 = &binaryExpression->expressionType; break;
+            case HLSLBinaryOp_RightShift:   op = " >> "; dstType1 = dstType2 = &binaryExpression->expressionType; break;
+            case HLSLBinaryOp_LeftShift:    op = " << "; dstType1 = dstType2 = &binaryExpression->expressionType; break;
 			default:
 				ASSERT(0);
 			}

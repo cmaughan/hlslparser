@@ -257,10 +257,16 @@ bool HLSLTree::GetExpressionValue(HLSLExpression * expression, int & value)
 
         switch(binaryExpression->binaryOp)
         {
-            case HLSLBinaryOp_And:
+            case HLSLBinaryOp_AndAnd:
                 value = value1 && value2;
                 return true;
             case HLSLBinaryOp_Or:
+                value = value1 || value2;
+                return true;
+            case HLSLBinaryOp_LeftShift:
+                value = value1 || value2;
+                return true;
+            case HLSLBinaryOp_RightShift:
                 value = value1 || value2;
                 return true;
             case HLSLBinaryOp_Add:

@@ -89,8 +89,80 @@ struct Intrinsic
         argument[3].type.baseType       = arg4;
         argument[3].type.flags          = HLSLTypeFlag_Const;
     }
+    explicit Intrinsic(const char* name, HLSLBaseType returnType, HLSLBaseType arg1, HLSLBaseType arg2, HLSLBaseType arg3, HLSLBaseType arg4, HLSLBaseType arg5)
+    {
+        function.name = name;
+        function.returnType.baseType = returnType;
+        function.argument = argument + 0;
+        function.numArguments = 4;
+        argument[0].type.baseType = arg1;
+        argument[0].type.flags = HLSLTypeFlag_Const;
+        argument[0].nextArgument = argument + 1;
+        argument[1].type.baseType = arg2;
+        argument[1].type.flags = HLSLTypeFlag_Const;
+        argument[1].nextArgument = argument + 2;
+        argument[2].type.baseType = arg3;
+        argument[2].type.flags = HLSLTypeFlag_Const;
+        argument[2].nextArgument = argument + 3;
+        argument[3].type.baseType = arg4;
+        argument[3].type.flags = HLSLTypeFlag_Const;
+        argument[3].nextArgument = argument + 4;
+        argument[4].type.baseType = arg5;
+        argument[4].type.flags = HLSLTypeFlag_Const;
+    }
+    explicit Intrinsic(const char* name, HLSLBaseType returnType, HLSLBaseType arg1, HLSLBaseType arg2, HLSLBaseType arg3, HLSLBaseType arg4, HLSLBaseType arg5, HLSLBaseType arg6)
+    {
+        function.name = name;
+        function.returnType.baseType = returnType;
+        function.argument = argument + 0;
+        function.numArguments = 4;
+        argument[0].type.baseType = arg1;
+        argument[0].type.flags = HLSLTypeFlag_Const;
+        argument[0].nextArgument = argument + 1;
+        argument[1].type.baseType = arg2;
+        argument[1].type.flags = HLSLTypeFlag_Const;
+        argument[1].nextArgument = argument + 2;
+        argument[2].type.baseType = arg3;
+        argument[2].type.flags = HLSLTypeFlag_Const;
+        argument[2].nextArgument = argument + 3;
+        argument[3].type.baseType = arg4;
+        argument[3].type.flags = HLSLTypeFlag_Const;
+        argument[3].nextArgument = argument + 4;
+        argument[4].type.baseType = arg5;
+        argument[4].type.flags = HLSLTypeFlag_Const;
+        argument[4].nextArgument = argument + 5;
+        argument[5].type.baseType = arg6;
+        argument[5].type.flags = HLSLTypeFlag_Const;
+    }
+    explicit Intrinsic(const char* name, HLSLBaseType returnType, HLSLBaseType arg1, HLSLBaseType arg2, HLSLBaseType arg3, HLSLBaseType arg4, HLSLBaseType arg5, HLSLBaseType arg6, HLSLBaseType arg7)
+    {
+        function.name = name;
+        function.returnType.baseType = returnType;
+        function.argument = argument + 0;
+        function.numArguments = 4;
+        argument[0].type.baseType = arg1;
+        argument[0].type.flags = HLSLTypeFlag_Const;
+        argument[0].nextArgument = argument + 1;
+        argument[1].type.baseType = arg2;
+        argument[1].type.flags = HLSLTypeFlag_Const;
+        argument[1].nextArgument = argument + 2;
+        argument[2].type.baseType = arg3;
+        argument[2].type.flags = HLSLTypeFlag_Const;
+        argument[2].nextArgument = argument + 3;
+        argument[3].type.baseType = arg4;
+        argument[3].type.flags = HLSLTypeFlag_Const;
+        argument[3].nextArgument = argument + 4;
+        argument[4].type.baseType = arg5;
+        argument[4].type.flags = HLSLTypeFlag_Const;
+        argument[4].nextArgument = argument + 5;
+        argument[5].type.baseType = arg6;
+        argument[5].type.flags = HLSLTypeFlag_Const;
+        argument[5].nextArgument = argument + 6;
+        argument[6].type.baseType = arg7;
+        argument[6].type.flags = HLSLTypeFlag_Const;
+    }
     HLSLFunction    function;
-    HLSLArgument    argument[4];
+    HLSLArgument    argument[7];
 };
 
 enum NumericType
@@ -461,6 +533,35 @@ const Intrinsic _intrinsic[] =
         INTRINSIC_FLOAT1_FUNCTION( "frac" ),
 
         INTRINSIC_FLOAT2_FUNCTION( "fmod" ),
+
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Uint),
+
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Uint, HLSLBaseType_Uint),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Uint),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint),
+
+        // With/Without mip level
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Float, HLSLBaseType_Float),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Uint, HLSLBaseType_Float),
+
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Float, HLSLBaseType_Float, HLSLBaseType_Float),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Float, HLSLBaseType_Float),
+        Intrinsic("GetDimensions", HLSLBaseType_Void,  HLSLBaseType_Float),
 
         Intrinsic( "clip", HLSLBaseType_Void,  HLSLBaseType_Float    ),
         Intrinsic( "clip", HLSLBaseType_Void,  HLSLBaseType_Float2   ),
@@ -876,8 +977,10 @@ static const char* GetBinaryOpName(HLSLBinaryOp binaryOp)
 {
     switch (binaryOp)
     {
-    case HLSLBinaryOp_And:          return "&&";
+    case HLSLBinaryOp_AndAnd:       return "&&";
     case HLSLBinaryOp_Or:           return "||";
+    case HLSLBinaryOp_LeftShift:    return "<<";
+    case HLSLBinaryOp_RightShift:   return ">>";
     case HLSLBinaryOp_Add:          return "+";
     case HLSLBinaryOp_Sub:          return "-";
     case HLSLBinaryOp_Mul:          return "*";
@@ -1087,8 +1190,10 @@ static bool GetBinaryOpResultType(HLSLBinaryOp binaryOp, const HLSLType& type1, 
 
     switch (binaryOp)
     {
-    case HLSLBinaryOp_And:
+    case HLSLBinaryOp_AndAnd:
     case HLSLBinaryOp_Or:
+    case HLSLBinaryOp_LeftShift:
+    case HLSLBinaryOp_RightShift:
     case HLSLBinaryOp_Less:
     case HLSLBinaryOp_Greater:
     case HLSLBinaryOp_LessEqual:
@@ -1351,6 +1456,20 @@ bool HLSLParser::ParseTopLevel(HLSLStatement*& statement)
     }
     else if (AcceptType(true, type, typeName, &typeFlags))
     {
+        HLSLBaseType templateType = HLSLBaseType_Void;
+
+        // Check for template type, such as Teture2D<uint4>
+        if (Accept('<'))
+        {
+            int          templateTypeFlags = false;
+            const char*  templateTypeName = nullptr;
+            if (!ExpectType(false, templateType, templateTypeName, &templateTypeFlags))
+            {
+                return false;
+            }
+            Expect('>');
+        }
+
         // Global declaration (uniform or function).
         const char* globalName = NULL;
         if (!ExpectIdentifier(globalName))
@@ -1396,10 +1515,11 @@ bool HLSLParser::ParseTopLevel(HLSLStatement*& statement)
         else
         {
             // Uniform declaration.
-            HLSLDeclaration* declaration = m_tree->AddNode<HLSLDeclaration>(fileName, line);
-            declaration->name            = globalName;
-            declaration->type.baseType   = type;
-            declaration->type.flags      = typeFlags;
+            HLSLDeclaration* declaration        = m_tree->AddNode<HLSLDeclaration>(fileName, line);
+            declaration->name                   = globalName;
+            declaration->type.baseType          = type;
+            declaration->type.baseTemplateType  = templateType;
+            declaration->type.flags             = typeFlags;
 
             // Handle array syntax.
             if (Accept('['))
@@ -1840,8 +1960,10 @@ bool HLSLParser::AcceptBinaryOperator(int priority, HLSLBinaryOp& binaryOp)
     int token = m_tokenizer.GetToken();
     switch (token)
     {
-    case HLSLToken_AndAnd:          binaryOp = HLSLBinaryOp_And;          break;
+    case HLSLToken_AndAnd:          binaryOp = HLSLBinaryOp_AndAnd;       break;
     case HLSLToken_BarBar:          binaryOp = HLSLBinaryOp_Or;           break;
+    case HLSLToken_LeftShift:       binaryOp = HLSLBinaryOp_LeftShift;    break;
+    case HLSLToken_RightShift:      binaryOp = HLSLBinaryOp_RightShift;   break;
     case '+':                       binaryOp = HLSLBinaryOp_Add;          break;
     case '-':                       binaryOp = HLSLBinaryOp_Sub;          break;
     case '*':                       binaryOp = HLSLBinaryOp_Mul;          break;
@@ -2303,7 +2425,16 @@ bool HLSLParser::ParseTerminalExpression(HLSLExpression*& expression, bool& need
         // Handle function calls. Note, HLSL functions aren't like C function
         // pointers -- we can only directly call on an identifier, not on an
         // expression.
-        if (Accept('('))
+        bool memberFunc = Accept('.');
+        /*if (memberFunc)
+        {
+            if (!Expect(HLSLToken_Identifier))
+            {
+                return false;
+            }
+        }
+        */
+        if (memberFunc || Accept('('))
         {
             HLSLFunctionCall* functionCall = m_tree->AddNode<HLSLFunctionCall>(fileName, line);
             done = false;

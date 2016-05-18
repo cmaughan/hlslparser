@@ -136,8 +136,10 @@ inline bool isVectorType( HLSLBaseType baseType )
 
 enum HLSLBinaryOp
 {
-    HLSLBinaryOp_And,
+    HLSLBinaryOp_AndAnd,
     HLSLBinaryOp_Or,
+    HLSLBinaryOp_LeftShift,
+    HLSLBinaryOp_RightShift,
     HLSLBinaryOp_Add,
     HLSLBinaryOp_Sub,
     HLSLBinaryOp_Mul,
@@ -245,12 +247,14 @@ struct HLSLType
     explicit HLSLType(HLSLBaseType _baseType = HLSLBaseType_Unknown)
     { 
         baseType    = _baseType;
+        baseTemplateType = HLSLBaseType_Void;
         typeName    = NULL;
         array       = false;
         arraySize   = NULL;
         flags  = 0;
     }
     HLSLBaseType        baseType;
+    HLSLBaseType        baseTemplateType;
     const char*         typeName;       // For user defined types.
     bool                array;
     HLSLExpression*     arraySize;

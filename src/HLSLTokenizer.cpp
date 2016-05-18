@@ -43,21 +43,21 @@ static const char* _reservedWords[] =
         "uint3",
         "uint4",
         "texture",
-        "texture1D",
-        "texture1DArray",
-        "texture2D",
-        "texture2DArray",
-        "texture2DMS",
-        "texture2DMSArray",
-        "texture3D",
-        "textureCube",
-        "textureArray",
+        "Texture1D",
+        "Texture1DArray",
+        "Texture2D",
+        "Texture2DArray",
+        "Texture2DMS",
+        "Texture2DMSArray",
+        "Texture3D",
+        "TextureCube",
+        "TextureArray",
         "sampler",
-        "sampler2D",
-        "sampler3D",
-        "samplerCUBE",
-        "sampler2DShadow",
-        "sampler2DMS",
+        "Sampler2D",
+        "Sampler3D",
+        "SamplerCUBE",
+        "Sampler2DShadow",
+        "Sampler2DMS",
 
         "if",
         "else",
@@ -207,6 +207,18 @@ void HLSLTokenizer::Next()
     else if (m_buffer[0] == '|' && m_buffer[1] == '|')
     {
         m_token = HLSLToken_BarBar;
+        m_buffer += 2;
+        return;
+    }
+    else if (m_buffer[0] == '<' && m_buffer[1] == '<')
+    {
+        m_token = HLSLToken_LeftShift;
+        m_buffer += 2;
+        return;
+    }
+    else if (m_buffer[0] == '>' && m_buffer[1] == '>')
+    {
+        m_token = HLSLToken_RightShift;
         m_buffer += 2;
         return;
     }

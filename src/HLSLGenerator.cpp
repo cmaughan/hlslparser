@@ -580,8 +580,10 @@ void HLSLGenerator::OutputExpression(HLSLExpression* expression)
         case HLSLBinaryOp_SubAssign:    op = " -= "; break;
         case HLSLBinaryOp_MulAssign:    op = " *= "; break;
         case HLSLBinaryOp_DivAssign:    op = " /= "; break;
-        case HLSLBinaryOp_And:          op = " && "; break;
+        case HLSLBinaryOp_AndAnd:       op = " && "; break;
         case HLSLBinaryOp_Or:           op = " || "; break;
+        case HLSLBinaryOp_LeftShift:    op = " << "; break;
+        case HLSLBinaryOp_RightShift:   op = " >> "; break;
         default:
             ASSERT(0);
         }
